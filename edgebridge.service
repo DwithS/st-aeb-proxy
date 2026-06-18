@@ -1,0 +1,18 @@
+[Unit]
+Description=st-aeb-proxy (SmartThings Custom AEB Proxy Server)
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/aeb-proxy
+# uv를 통해 생성된 .venv 가상환경의 python3 인터프리터를 사용하여 구동합니다.
+ExecStart=/opt/aeb-proxy/.venv/bin/python3 aeb_proxy.py
+Restart=always
+RestartSec=5
+Environment=SERVER_PORT=8088
+# 스마트싱스 API 토큰이 필요한 경우 아래 주석을 해제하고 토큰을 기입합니다.
+# Environment=SMARTTHINGS_TOKEN=your_token_here
+
+[Install]
+WantedBy=multi-user.target
