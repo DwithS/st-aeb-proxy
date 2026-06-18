@@ -447,6 +447,7 @@ async def api_forward(request: Request, url: str):
             data=body_bytes,
             timeout=10
         )
+        logger.info(f"Response from {url}: status={r.status_code}, body={r.text[:1000]}")
         return Response(
             content=r.content,
             status_code=r.status_code,
